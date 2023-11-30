@@ -1,5 +1,3 @@
-local QBCore = exports['qb-core']:GetCoreObject()
-
 exports('AddGangXPForPlayer', function(source, gangName, xp)
     UpdateGangXP(gangName, xp)
 end)

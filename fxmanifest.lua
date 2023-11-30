@@ -12,8 +12,7 @@ lua54 'yes'
 
 shared_scripts {
     'shared/*',
-    '@ox_lib/init.lua',
-    'config.lua'
+    '@ox_lib/init.lua'
 }
 
 server_scripts {

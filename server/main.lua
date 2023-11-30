@@ -1,7 +1,3 @@
-exports('AddGangXPForPlayer', function(source, gangName, xp)
-    UpdateGangXP(gangName, xp)
-end)
-
 function UpdateGangXP(gangName, xp)
     if Config.Debug then
         print(("Updating gang XP for gang: %s"):format(gangName))
@@ -53,10 +49,34 @@ function UpdateGangXP(gangName, xp)
     end)
 end
 
-exports('GetGangLevel', function(gangName, callback)
-    GetGangLevel(gangName, callback)
+exports('AddGangXPForPlayer', function(source, gangName, xp)
+    UpdateGangXP(gangName, xp)
 end)
 
+function RemoveGangXPForPlayer(targetPlayer, gangName, xp)
+    local selectQuery = 'SELECT * FROM gangs WHERE gang_name = ?'
+    local selectParams = { gangName }
+
+    MySQL.Async.fetchAll(selectQuery, selectParams, function(result)
+        if result and #result > 0 then
+            local currentXP = result[1].gang_xp
+            local newXP = math.max(currentXP - xp, 0) -- Ensure XP doesn't go below 0
+
+            local updateQuery = 'UPDATE gangs SET gang_xp = ? WHERE gang_name = ?'
+            local updateParams = { newXP, gangName }
+
+            MySQL.Async.execute(updateQuery, updateParams, function(affectedRows)
+                if Config.Debug then
+                    print(('Removed %d XP for gang %s for player %d'):format(xp, gangName, targetPlayer))
+                end
+            end)
+        else
+            print(('Gang %s not found'):format(gangName))
+        end
+    end)
+end
+
+exports('RemoveGangXPForPlayer', RemoveGangXPForPlayer)
     
 function GetGangLevel(gangName, callback)
     local selectQuery = 'SELECT gang_level FROM gangs WHERE gang_name = ?'
@@ -71,3 +91,7 @@ function GetGangLevel(gangName, callback)
         end
     end)
 end
+
+exports('GetGangLevel', function(gangName, callback)
+    GetGangLevel(gangName, callback)
+end)

@@ -19,6 +19,9 @@ QBCore, QBox.
 local gangName = Player.PlayerData.gang.name
 exports['possible-gang-levels']:AddGangXPForPlayer(src, gangName, 100)
 
+## Remove Gang XP
+exports['possible-gang-levels']:RemoveGangXPForPlayer(src, gangName, xpToRemove)
+
 #### Check Gang Level
 ```
 local gangName = Player.PlayerData.gang.name

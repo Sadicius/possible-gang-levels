@@ -43,9 +43,12 @@ exports['possible-gang-levels']:GetGangLevel(gangName, function(gangLevel)
 
 ## Commands
 
-/SetGangXP - Allows Admins to set a gangs xp.
-/RemoveGangXP - Allows Admind to remove a gang xp.
-/MyGangLevel - Allows players to be notified of their Gang Level.
+> /SetGangXP 
+- Allows Admins to set a gangs xp.
+> /RemoveGangXP
+- Allows Admind to remove a gang xp.
+> /MyGangLevel 
+- Allows players to be notified of their Gang Level.
 
 ## Support:
 

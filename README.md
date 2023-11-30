@@ -15,14 +15,17 @@ QBCore, QBox.
 
 ## Export Examples (Server):
 
-#### Add Gang XP
+### Add Gang XP
+```
 local gangName = Player.PlayerData.gang.name
 exports['possible-gang-levels']:AddGangXPForPlayer(src, gangName, 100)
+```
 
 ## Remove Gang XP
+```
 exports['possible-gang-levels']:RemoveGangXPForPlayer(src, gangName, xpToRemove)
-
-#### Check Gang Level
+```
+## Check Gang Level
 ```
 local gangName = Player.PlayerData.gang.name
 exports['possible-gang-levels']:GetGangLevel(gangName, function(gangLevel)

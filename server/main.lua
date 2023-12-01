@@ -53,6 +53,7 @@ end
 
 exports('AddGangXPForPlayer', function(source, gangName, xp)
     UpdateGangXP(gangName, xp)
+    TriggerClientEvent('possible-gang-level:client:AddedXP', source, xp)
 end)
 
 function RemoveGangXPForPlayer(targetPlayer, gangName, xp)

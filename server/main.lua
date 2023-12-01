@@ -1,3 +1,5 @@
+local QBCore = exports['qb-core']:GetCoreObject()
+
 function UpdateGangXP(gangName, xp)
     if Config.Debug then
         print(("Updating gang XP for gang: %s"):format(gangName))
@@ -74,7 +76,10 @@ function RemoveGangXPForPlayer(targetPlayer, gangName, xp)
             print(('Gang %s not found'):format(gangName))
         end
     end)
+    local src = targetPlayer
+    TriggerClientEvent('possible-gang-level:client:RemovedXP', src, xp)
 end
+
 
 exports('RemoveGangXPForPlayer', RemoveGangXPForPlayer)
     

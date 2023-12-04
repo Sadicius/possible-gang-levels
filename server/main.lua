@@ -1,5 +1,9 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
+exports('AddGangXPForPlayer', function(source, gangName, xp)
+    UpdateGangXP(gangName, xp)
+end)
+
 function UpdateGangXP(gangName, xp)
     if Config.Debug then
         print(("Updating gang XP for gang: %s"):format(gangName))
@@ -101,3 +105,33 @@ end
 exports('GetGangLevel', function(gangName, callback)
     GetGangLevel(gangName, callback)
 end)
+
+function CheckAndUpdateLevel(gangName, currentXP, newXP)
+    local selectLevelQuery = 'SELECT gang_level FROM gangs WHERE gang_name = ?'
+    local selectLevelParams = { gangName }
+
+    MySQL.Async.fetchAll(selectLevelQuery, selectLevelParams, function(levelResult)
+        if levelResult and #levelResult > 0 then
+            local currentLevel = levelResult[1].gang_level
+            local newLevel = (newXP > 0) and math.floor(newXP / 100) + 1 or 1
+
+            if Config.Debug then
+                print(('CheckAndUpdateLevel - Gang: %s, Current XP: %d, New XP: %d, Current Level: %d, New Level: %d'):format(gangName, currentXP, newXP, currentLevel, newLevel))
+            end
+
+            if newLevel ~= currentLevel then
+                -- Gang leveled up, update the level
+                local updateLevelQuery = 'UPDATE gangs SET gang_level = ? WHERE gang_name = ?'
+                local updateLevelParams = { newLevel, gangName }
+
+                MySQL.Async.execute(updateLevelQuery, updateLevelParams, function(levelRowsAffected)
+                    if Config.Debug then
+                        print(('Gang leveled up to Level %d'):format(newLevel))
+                    end
+                end)
+            end
+        else
+            print(('Error fetching current level for gang: %s'):format(gangName))
+        end
+    end)
+end

@@ -1,13 +1,3 @@
-RegisterNetEvent('possible-gang-level:client:MyGangLevel')
-AddEventHandler('possible-gang-level:client:MyGangLevel', function(gangLevel)
-    lib.notify({
-        title = Config.GangLevelNotificationTitle,
-        description = ('Your gang is at Level %d!'):format(gangLevel),
-        type = Config.GangLevelNotificationType,
-        position = Config.NotificationPosition,
-    })
-end)
-
 RegisterNetEvent('possible-gang-level:client:AddedXP')
 AddEventHandler('possible-gang-level:client:AddedXP', function(xp)
     if Config.AddXPNotification then
@@ -17,10 +7,20 @@ AddEventHandler('possible-gang-level:client:AddedXP', function(xp)
             type = Config.AddXPNotificationType, 
             position = Config.NotificationPosition,
         })
-    else if Config.Debug then
-        print('AddXP Notification is set to false in config.lua')
+        else if Config.Debug then
+            print('AddXP Notification is set to false in config.lua')
+        end
     end
-    end
+end)
+
+RegisterNetEvent('possible-gang-level:client:MyGangLevel')
+AddEventHandler('possible-gang-level:client:MyGangLevel', function(gangLevel)
+    lib.notify({
+        title = Config.GangLevelNotificationTitle,
+        description = ('Your gang is at Level %d!'):format(gangLevel),
+        type = Config.GangLevelNotificationType,
+        position = Config.NotificationPosition,
+    })
 end)
 
 RegisterNetEvent('possible-gang-level:client:RemoveXPCommand')
@@ -32,7 +32,6 @@ AddEventHandler('possible-gang-level:client:RemoveXPCommand', function(gangName,
             position = Config.NotificationPosition,
         })
 end)
-
 
 RegisterNetEvent('possible-gang-level:client:SetXPCommand')
 AddEventHandler('possible-gang-level:client:SetXPCommand', function(gangName, xp)

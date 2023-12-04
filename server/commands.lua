@@ -28,8 +28,7 @@ lib.addCommand('SetGangXP', {
     local Player = QBCore.Functions.GetPlayer(src)
 
     if targetPlayer and gangName and xp then
-        local selectQuery = 'SELECT * FROM gangs WHERE gang_name = ?'
-        local selectParams = { gangName }
+stop         local selectParams = { gangName }
 
         MySQL.Async.fetchAll(selectQuery, selectParams, function(result)
             if result and #result > 0 then
@@ -95,7 +94,7 @@ lib.addCommand('RemoveGangXP', {
                     if Config.Debug then
                         print(('Removed %d XP for gang %s for player %d'):format(xp, gangName, targetPlayer))
                     end
-                    TriggerClientEvent('possible-gang-level:client:RemovedXPCommand', src)
+                    TriggerClientEvent('possible-gang-level:client:RemoveXPCommand', src, gangName, xp)
                 end)
             else
                 print(('Gang %s not found'):format(gangName))

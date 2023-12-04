@@ -23,19 +23,14 @@ AddEventHandler('possible-gang-level:client:AddedXP', function(xp)
     end
 end)
 
-RegisterNetEvent('possible-gang-level:client:RemovedXP')
-AddEventHandler('possible-gang-level:client:RemovedXP', function(xp)
-    if Config.RemoveXPNotification then
+RegisterNetEvent('possible-gang-level:client:RemoveXPCommand')
+AddEventHandler('possible-gang-level:client:RemoveXPCommand', function(gangName, xp)
         lib.notify({
-            title = Config.RemoveXPNotificationTitle,
-            description = ('Your gang lost %d XP!'):format(xp),
-            type = Config.RemoveXPNotificationType, 
+            title = 'Gang XP Removed',
+            description = ('You removed %d XP from gang: %s'):format(xp, gangName),
+            type = 'success', 
             position = Config.NotificationPosition,
         })
-    else if Config.Debug then
-        print('RemovedX PNotification is set to false in config.lua')
-    end
-    end
 end)
 
 
@@ -43,19 +38,8 @@ RegisterNetEvent('possible-gang-level:client:SetXPCommand')
 AddEventHandler('possible-gang-level:client:SetXPCommand', function(gangName, xp)
     lib.notify({
         title = 'Gang XP Set',
-        description = ('You removed %d XP from gang: %s'):format(xp, gangName),
+        description = ('You set %d XP from gang: %s'):format(xp, gangName),
         type = 'success', 
         position = Config.NotificationPosition,
     })
 end)
-
-RegisterNetEvent('possible-gang-level:client:RemovedXPCommand')
-AddEventHandler('possible-gang-level:client:RemovedXPCommand', function()
-        lib.notify({
-            title = 'Test',
-            description = 'You removed Gang XP',
-            type = 'success', 
-            position = Config.NotificationPosition,
-        })
-end)
-

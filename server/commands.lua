@@ -51,7 +51,6 @@ lib.addCommand('setgangxp', {
     end
 end)
 
-
 lib.addCommand('removegangxp', {
     help = 'Remove gang XP for a player',
     params = {
@@ -87,13 +86,19 @@ lib.addCommand('removegangxp', {
             if result and #result > 0 then
                 local currentXP = result[1].gang_xp
                 local newXP = math.max(currentXP - xp, 0)  -- Ensure XP doesn't go below 0
-
+    
                 local updateQuery = 'UPDATE gangs SET gang_xp = ? WHERE gang_name = ?'
                 local updateParams = { newXP, gangName }
-
+    
                 MySQL.Async.execute(updateQuery, updateParams, function(affectedRows)
                     if Config.Debug then
                         print(('Removed %d XP for gang %s for player %d'):format(xp, gangName, targetPlayer))
+                    end
+                    -- Pass currentXP to the CheckAndUpdateLevel function
+                    if CheckAndUpdateLevel then
+                        CheckAndUpdateLevel(gangName, currentXP, newXP)
+                    else
+                        print('CheckAndUpdateLevel function not found!')
                     end
                     TriggerClientEvent('possible-gang-level:client:RemoveXPCommand', src, gangName, xp)
                 end)

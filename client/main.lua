@@ -38,3 +38,24 @@ AddEventHandler('possible-gang-level:client:RemovedXP', function(xp)
     end
 end)
 
+
+RegisterNetEvent('possible-gang-level:client:SetXPCommand')
+AddEventHandler('possible-gang-level:client:SetXPCommand', function(gangName, xp)
+    lib.notify({
+        title = 'Gang XP Set',
+        description = ('You removed %d XP from gang: %s'):format(xp, gangName),
+        type = 'success', 
+        position = Config.NotificationPosition,
+    })
+end)
+
+RegisterNetEvent('possible-gang-level:client:RemovedXPCommand')
+AddEventHandler('possible-gang-level:client:RemovedXPCommand', function()
+        lib.notify({
+            title = 'Test',
+            description = 'You removed Gang XP',
+            type = 'success', 
+            position = Config.NotificationPosition,
+        })
+end)
+

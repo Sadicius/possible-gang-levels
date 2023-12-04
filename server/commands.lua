@@ -24,6 +24,8 @@ lib.addCommand('SetGangXP', {
     local targetPlayer = tonumber(args.target)
     local gangName = args.gangName
     local xp = tonumber(args.xp)
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
 
     if targetPlayer and gangName and xp then
         local selectQuery = 'SELECT * FROM gangs WHERE gang_name = ?'
@@ -38,6 +40,7 @@ lib.addCommand('SetGangXP', {
                     if Config.Debug then
                         print(('Set %d XP for gang %s for player %d'):format(xp, gangName, targetPlayer))
                     end
+                    TriggerClientEvent('possible-gang-level:client:SetXPCommand', src, gangName, xp)
                 end)
             else
                 print(('Gang %s not found'):format(gangName))
@@ -73,6 +76,8 @@ lib.addCommand('RemoveGangXP', {
     local targetPlayer = tonumber(args.target)
     local gangName = args.gangName
     local xp = tonumber(args.xp)
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
 
     if targetPlayer and gangName and xp then
         local selectQuery = 'SELECT * FROM gangs WHERE gang_name = ?'
@@ -90,6 +95,7 @@ lib.addCommand('RemoveGangXP', {
                     if Config.Debug then
                         print(('Removed %d XP for gang %s for player %d'):format(xp, gangName, targetPlayer))
                     end
+                    TriggerClientEvent('possible-gang-level:client:RemovedXPCommand', src)
                 end)
             else
                 print(('Gang %s not found'):format(gangName))

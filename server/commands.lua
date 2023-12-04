@@ -1,6 +1,6 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
-lib.addCommand('SetGangXP', {
+lib.addCommand('setgangxp', {
     help = 'Set gang XP for a player',
     params = {
         {
@@ -28,7 +28,8 @@ lib.addCommand('SetGangXP', {
     local Player = QBCore.Functions.GetPlayer(src)
 
     if targetPlayer and gangName and xp then
-stop         local selectParams = { gangName }
+        local selectQuery = 'SELECT * FROM gangs WHERE gang_name = ?'
+        local selectParams = { gangName }
 
         MySQL.Async.fetchAll(selectQuery, selectParams, function(result)
             if result and #result > 0 then
@@ -51,7 +52,7 @@ stop         local selectParams = { gangName }
 end)
 
 
-lib.addCommand('RemoveGangXP', {
+lib.addCommand('removegangxp', {
     help = 'Remove gang XP for a player',
     params = {
         {
@@ -106,7 +107,7 @@ lib.addCommand('RemoveGangXP', {
 end)
 
 
-lib.addCommand('MyGangLevel', {
+lib.addCommand('myganglevel', {
     help = 'Check your gang level',
     restricted = false -- Allow all players to use this command
 }, function(source, args, raw)

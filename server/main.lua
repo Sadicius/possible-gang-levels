@@ -85,12 +85,15 @@ function RemoveGangXPForPlayer(targetPlayer, gangName, xp)
     TriggerClientEvent('possible-gang-level:client:RemovedXP', src, xp)
 end
 
-
 exports('RemoveGangXPForPlayer', RemoveGangXPForPlayer)
     
 function GetGangLevel(gangName, callback)
+    if Config.Debug then
+        print("Getting gang level for:", gangName)
+    end
+    
     local selectQuery = 'SELECT gang_level FROM gangs WHERE gang_name = ?'
-    local selectParams = { gangName }
+    local selectParams = { tostring(gangName) }
 
     MySQL.Async.fetchAll(selectQuery, selectParams, function(result)
         if result and #result > 0 then
@@ -105,6 +108,7 @@ end
 exports('GetGangLevel', function(gangName, callback)
     GetGangLevel(gangName, callback)
 end)
+
 
 function CheckAndUpdateLevel(gangName, currentXP, newXP)
     local selectLevelQuery = 'SELECT gang_level FROM gangs WHERE gang_name = ?'

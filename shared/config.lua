@@ -35,4 +35,33 @@ Config.SetXPCommandHelp = 'Set gang XP for a player' -- Help text for /setgangxp
 Config.RemoveXPCommand = 'removegangxp'              -- Command to remove gang XP for a player
 Config.RemoveXPCommandHelp = 'Remove gang XP for a player' -- Help text for /removegangxp
 Config.MyGangLevelCommand = 'myganglevel'                  -- Command to check your gang level
-Config.MyGangLevelCommandHelp = 'Check your gang level' -- Help text for /myganglevel
+Config.MyGangLevelCommandHelp = 'Check your gang level'    -- Help text for /myganglevel
+---------------------------------------------------------------
+-- Stashes
+----------------------------------------------------------------
+Config.DefaultGangLevel = 1 -- Default gang level
+Config.StashMultiplier = 1000 -- Multiplier for stash weight based on gang level
+Config.Stashes = {
+    ballas = {
+        coords = vector3(-2.5, -1821.82, 29.55),
+        slots = 100,
+        label = 'Ballas Stash',
+        owner = false,
+        id = 'ballas',
+        group = 'ballas',
+        groups = {
+            ['ballas'] = 0
+        }
+    },
+    vagos = {
+        coords = vector3(338.5, -2039.5, 21.0),
+        slots = 100,
+        label = 'Vagos Stash',
+        owner = false,
+        id = 'vagos',
+        group = 'vagos',
+        groups = {
+            ['vagos'] = 0
+        }
+    },
+   }

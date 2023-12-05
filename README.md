@@ -13,7 +13,7 @@ QBCore, QBox.
 
 - Every 100xp a gang level is added
 
-### Export Examples (Server):
+## Export Examples (Server):
 
 ## Add Gang XP
 ```
@@ -37,7 +37,7 @@ exports['possible-gang-levels']:GetGangLevel(gangName, function(gangLevel)
     end)
 ```
 
-### Stashes
+## Stashes
 The script can now handle Gang stashes, if you're using ox_inventory.
 
 Define the stashes in the /shared/config.lua file, like the given examples. The stashes are then registered dynamically on resource start. The Gang stash size is based on the Gang level, it increases as gang level to give incentive to level up and play your server.

@@ -13,9 +13,9 @@ QBCore, QBox.
 
 - Every 100xp a gang level is added
 
-## Export Examples (Server):
+### Export Examples (Server):
 
-### Add Gang XP
+## Add Gang XP
 ```
 local gangName = Player.PlayerData.gang.name
 exports['possible-gang-levels']:AddGangXPForPlayer(src, gangName, 100)
@@ -37,13 +37,13 @@ exports['possible-gang-levels']:GetGangLevel(gangName, function(gangLevel)
     end)
 ```
 
-## Commands
+### Commands
 
-> /SetGangXP 
+> /setgangxp 
 - Allows Admins to set a gangs xp.
-> /RemoveGangXP
+> /removegangxp
 - Allows Admind to remove a gang xp.
-> /MyGangLevel 
+> /myganglevel 
 - Allows players to be notified of their Gang Level.
 
 ## Dependencies

@@ -1,7 +1,7 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
-lib.addCommand('setgangxp', {
-    help = 'Set gang XP for a player',
+lib.addCommand(Config.SetXPCommand, {
+    help = Config.SetXPCommandHelp,
     params = {
         {
             name = 'target',
@@ -51,8 +51,8 @@ lib.addCommand('setgangxp', {
     end
 end)
 
-lib.addCommand('removegangxp', {
-    help = 'Remove gang XP for a player',
+lib.addCommand(Config.RemoveXPCommand, {
+    help = Config.RemoveXPCommandHelp,
     params = {
         {
             name = 'target',
@@ -112,8 +112,8 @@ lib.addCommand('removegangxp', {
 end)
 
 
-lib.addCommand('myganglevel', {
-    help = 'Check your gang level',
+lib.addCommand(Config.MyGangLevelCommand, {
+    help = Config.MyGangLevelCommandHelp,
     restricted = false -- Allow all players to use this command
 }, function(source, args, raw)
     local src = source

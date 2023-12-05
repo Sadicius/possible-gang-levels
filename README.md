@@ -37,6 +37,13 @@ exports['possible-gang-levels']:GetGangLevel(gangName, function(gangLevel)
     end)
 ```
 
+### Stashes
+The script can now handle Gang stashes, if you're using ox_inventory.
+
+Define the stashes in the /shared/config.lua file, like the given examples. The stashes are then registered dynamically on resource start. The Gang stash size is based on the Gang level, it increases as gang level to give incentive to level up and play your server.
+
+The feature was wrote on my lunch break and needs some proper testing, but it should work fine. If you find any issues, please let me know, I will ensure of proper testing for v1 release.
+
 ### Commands
 
 > /setgangxp 
@@ -49,6 +56,7 @@ exports['possible-gang-levels']:GetGangLevel(gangName, function(gangLevel)
 ## Dependencies
 - OxLib
 - OxMysql
+- OxInventory (Optional if using Stashes)
 
 ## Support:
 

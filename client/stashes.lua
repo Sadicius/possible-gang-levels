@@ -5,13 +5,13 @@ CreateThread(function()
         end
         exports.ox_target:addSphereZone({
             coords = stashData.coords,
+            radius = stashData.radius,
+            debug = Config.Debug,
             options = {
                 {
                     label = stashData.label,
                     icon = 'fas fa-hand',
-                    radius = 1,
                     distance = 1.5,
-                    debug = true,
                     onSelect = function()
                         if Config.Debug then
                             print("Attempting to open stash:", stashData.id)

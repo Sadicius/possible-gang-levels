@@ -1,6 +1,6 @@
 Config = {}
 
-Config.Debug = true -- Set to true if you want to see debug messages in the consoles (primary server console)
+Config.Debug = false -- Set to true if you want to see debug messages in the consoles (primary server console)
 ----------------------------------------------------------------
 -- Notifications
 ----------------------------------------------------------------
@@ -43,7 +43,8 @@ Config.DefaultGangLevel = 1 -- Default gang level
 Config.StashMultiplier = 1000 -- Multiplier for stash weight based on gang level
 Config.Stashes = {
     ballas = {
-        coords = vector3(-2.5, -1821.82, 29.55),
+        coords = vec3(-1.19, -1811.71, 25.35),
+        radius = 1.0,
         slots = 100,
         label = 'Ballas Stash',
         owner = false,
@@ -54,7 +55,8 @@ Config.Stashes = {
         }
     },
     vagos = {
-        coords = vector3(338.5, -2039.5, 21.0),
+        coords = vec3(328.31, -2000.47, 24.21),
+        radius = 1.0,
         slots = 100,
         label = 'Vagos Stash',
         owner = false,
@@ -64,4 +66,36 @@ Config.Stashes = {
             ['vagos'] = 0
         }
     },
-   }
+    -- Add gangs as needed
+}
+---------------------------------------------------------------
+-- Shops
+----------------------------------------------------------------
+Config.Shops = {
+    ballas = {
+        zoneCoords = vec3(-3.46, -1826.15, 29.15),
+        zoneRadius = 3.0,
+    },
+    vagos = {
+        zoneCoords = vec3(335.69, -1987.51, 24.21),
+        zoneRadius = 3.0,
+    },
+    -- Add gangs as needed
+}
+
+Config.ShopItems = {
+    item1 = {
+        label = 'Phone',
+        price = 100,
+        requiredGangLevel = 450,
+    },
+    item2 = {
+        label = 'Lockpick',
+        price = 150,
+        requiredGangLevel = 500,
+    },
+    -- Add items as needed
+}
+
+Config.ShopNotEnoughCashNotificationTitle = 'Insufficient Cash'                                             -- Title of the notification when a player doesn't have enough cash
+Config.ShopNotEnoughCashNotificationDescription = 'You do not have enough cash to purchase this item.'

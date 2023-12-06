@@ -1,9 +1,5 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
-exports('AddGangXPForPlayer', function(source, gangName, xp)
-    UpdateGangXP(gangName, xp)
-end)
-
 function UpdateGangXP(gangName, xp)
     if Config.Debug then
         print(("Updating gang XP for gang: %s"):format(gangName))
@@ -86,12 +82,22 @@ function RemoveGangXPForPlayer(targetPlayer, gangName, xp)
 end
 
 exports('RemoveGangXPForPlayer', RemoveGangXPForPlayer)
-    
+
+
+RegisterServerEvent('GetGangLevel')
+AddEventHandler('GetGangLevel', function(gangName)
+    local src = source
+    GetGangLevel(gangName, function(gangLevel)
+        TriggerClientEvent('SetPlayerGangLevel', src, gangLevel)
+    end)
+end)
+
+
 function GetGangLevel(gangName, callback)
     if Config.Debug then
         print("Getting gang level for:", gangName)
     end
-    
+
     local selectQuery = 'SELECT gang_level FROM gangs WHERE gang_name = ?'
     local selectParams = { tostring(gangName) }
 
@@ -108,7 +114,6 @@ end
 exports('GetGangLevel', function(gangName, callback)
     GetGangLevel(gangName, callback)
 end)
-
 
 function CheckAndUpdateLevel(gangName, currentXP, newXP)
     local selectLevelQuery = 'SELECT gang_level FROM gangs WHERE gang_name = ?'

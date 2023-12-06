@@ -1,15 +1,15 @@
 local playerGangLevel = 0
 
 function UpdatePlayerGangLevel(gangName)
-    TriggerServerEvent('GetGangLevel', gangName)
+    TriggerServerEvent('possible-gang-levels:GetGangLevel', gangName)
 end
 
 function capitalizeFirstLetter(str)
     return str:gsub("^%l", string.upper)
 end
 
-RegisterNetEvent('SetPlayerGangLevel')
-AddEventHandler('SetPlayerGangLevel', function(gangLevel)
+RegisterNetEvent('possible-gang-levels:SetPlayerGangLevel')
+AddEventHandler('possible-gang-levels:SetPlayerGangLevel', function(gangLevel)
     playerGangLevel = gangLevel
     if Config.Debug then
         print(('Set player gang level to %d'):format(playerGangLevel))
@@ -83,8 +83,8 @@ CreateThread(function()
     end
 end)
 
-RegisterNetEvent('possible-gang-level:client:NotEnoughCash')
-AddEventHandler('possible-gang-level:client:NotEnoughCash', function(xp)
+RegisterNetEvent('possible-gang-levels:client:NotEnoughCash')
+AddEventHandler('possible-gang-levels:client:NotEnoughCash', function(xp)
     lib.notify({
         title = Config.ShopNotEnoughCashNotificationTitle,
         description = Config.ShopNotEnoughCashNotificationTitle,

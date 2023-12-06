@@ -84,8 +84,8 @@ end
 exports('RemoveGangXPForPlayer', RemoveGangXPForPlayer)
 
 
-RegisterServerEvent('GetGangLevel')
-AddEventHandler('GetGangLevel', function(gangName)
+RegisterServerEvent('possible-gang-levels:GetGangLevel')
+AddEventHandler('possible-gang-levels:GetGangLevel', function(gangName)
     local src = source
     GetGangLevel(gangName, function(gangLevel)
         TriggerClientEvent('SetPlayerGangLevel', src, gangLevel)
